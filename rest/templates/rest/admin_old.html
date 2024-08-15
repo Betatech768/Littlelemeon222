@@ -1,0 +1,99 @@
+{% extends 'main.html' %} {% block content %}
+<style>
+  .admin {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    text-align: center;
+  }
+  .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .lower_content {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    text-align: center;
+  }
+</style>
+
+{% if user.is_authenticated %}
+<div>Hello! {{ request.user.username }}</div>
+<div class="admin">
+  <div>
+    <div class="header">
+      <h1>Menu Category</h1>
+      <a href="{% url 'create_cat' %}">Create Category</a>
+      {% for categories in categories %}
+      <div>
+        <a href="{% url 'update_cat' categories.id %}">Edit Category</a>
+        <a href="{% url 'delete_cat' categories.id %}">Delete Category</a>
+        <a href="{% url 'admin' %}?q={{ categories.name }}">
+          <h3>{{ categories.name }}</h3>
+        </a>
+        <p>{{ categories.description }}</p>
+      </div>
+      {% endfor %}
+      <a href="{% url 'admin' %}"><h3>All</h3></a>
+    </div>
+  </div>
+  <div>
+    <div class="header"><h1>Menu Items</h1></div>
+    <a href="{% url 'create_menu' %}">Create Menu</a>
+
+    {% for menus in menus %}
+    <div>
+      <div>
+        <a href="{% url 'update_menu' menus.id %}">Edit Menu</a>
+        <a href="{% url 'delete_menu' menus.id %}">Delete Menu</a>
+      </div>
+      <span>{{ menus.name }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  <div>
+    <div class="header">
+      <h1>Booking</h1>
+      <div><a href="{% url 'book_list' %}">View Bookings</a></div>
+      {% for bookings in bookings %}
+      <div>
+        <a href="{% url 'delete_book' bookings.id %}">Delete Booking</a>
+      </div>
+      <div>
+        <h4>{{ bookings.created | timesince }}</h4>
+        <h4>{{ bookings.first_name }} {{ bookings.last_name }}</h4>
+        <h5>{{ bookings.guest_number }}</h5>
+        <h6>{{ bookings.comment }}</h6>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<hr />
+
+<div class="lower_content">
+  <div class="user">
+    {% if request.user.is_superuser %}
+    <a href="{% url 'create_user' %}"><h4>Create User</h4></a>
+    {% endif %}
+  </div>
+  <div class="user">
+    <h2>Users</h2>
+    {% for users in users %} {% if request.user.is_superuser %}
+    <h4>{{ users.username }}</h4>
+    <a href="{% url 'delete_user' users.id %}"><h6>Delete User</h6></a>
+    {% endif %} {% endfor %}
+  </div>
+  <div class="order">
+    <h2>Orders</h2>
+    {% for takes in takes %}
+    <a href="{% url 'order_list' takes.id %}"><h4>{{ takes.full_name }}</h4></a>
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+<p>
+  You must be logged in to access this page.
+  <a href="{% url 'login_page' %}">Login</a>
+</p>
+{% endif %} {% endblock content %}

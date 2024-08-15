@@ -1,0 +1,12 @@
+{%extends 'main.html'%} {%block content%}
+
+<div>
+  <div>
+    <h3>Full Name: {{order.full_name}} {{order.quantity}}</h3>
+    <h3>Quantity: {{order.quantity}}</h3>
+    <h4>Deliver to: {{order.city}}</h4>
+    <h5>Order: {{order.order}}</h5>
+    <hr />
+  </div>
+</div>
+{%endblock content %}

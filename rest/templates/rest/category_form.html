@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block content %}
+<div class="conted">
+  <div class="containerddd">
+    <div class="headingddd">Create Category</div>
+    <form action="" method="POST" class="formdd">
+      {%csrf_token%} {%for field in form%}
+      <label for="cated">{{field.label}}:</label>
+      {{field}} {%endfor%}
+      <!-- <input
+        required
+        class="input"
+        type="text"
+        name="cated"
+        id="cated"
+        placeholder="Category Name"
+      />
+      <textarea
+        rows="4"
+        cols="50"
+        class="input"
+        placeholder="Description"
+        required
+      ></textarea> -->
+      <input class="login-button" type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
+{% endblock content %}

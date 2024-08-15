@@ -1,0 +1,38 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<style>
+  .booking {
+    background: url("{% static 'assets/img/background.jpg' %}") no-repeat center
+      center / cover;
+    padding: 20px; /* Add padding to create space inside the section */
+    min-height: 100vh; /* Ensure the section takes at least the full viewport height */
+    background-attachment: fixed;
+  }
+</style>
+<section class="booking">
+  <div class="form-container">
+    <form action="{%url 'create_book' %}" method="POST" class="form">
+      <div class="form-group">
+        {%csrf_token%} {%for field in form %}
+        <label for="email">{{field.label}}</label>
+        {{field}}{%endfor%}
+        <!-- <input type="text" id="email" name="email" required="" />
+      </div>
+      <div class="form-group">
+        <label for="email">Last Name</label>
+        <input type="text" id="email" name="email" required="" />
+      </div>
+      <div class="form-group">
+        <label for="email">Guest Number</label>
+        <input type="text" id="email" name="email" required="" />
+      </div>
+      <div class="form-group">
+        <label for="textarea">Comment</label>
+        <textarea name="textarea" id="textarea" rows="10" cols="50" required="">
+        </textarea>-->
+      </div>
+      <button class="form-submit-btn" type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+{% endblock content %}

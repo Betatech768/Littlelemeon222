@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="conted">
+  <div class="containerddd">
+    <div class="headingddd">Create Menu</div>
+    <form action="" method="POST" class="formdd">
+      {%csrf_token%}{%for field in form %}
+      <label for="fruit">{{field.label}}:</label>
+      {{field}}
+      <!-- <datalist id="fruits">
+        <option value="Apple"></option>
+        <option value="Banana"></option>
+        <option value="Cherry"></option>
+      </datalist> -->
+      {%endfor%}
+
+      <!-- <input
+        required
+        class="input"
+        type="text"
+        name="name"
+        id="cated"
+        placeholder="Menu Name"
+      />
+
+      <input
+        class="input"
+        type="number"
+        name="price"
+        id="price"
+        placeholder="Enter Price"
+      />
+      <textarea
+        rows="4"
+        cols="50"
+        class="input"
+        placeholder="Menu Description"
+        required
+      ></textarea> -->
+      <input class="login-button" type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
+{% endblock content %}

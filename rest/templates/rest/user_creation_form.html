@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="conted">
+  <div class="containerddd">
+    <div class="headingddd">Create User</div>
+    <form action="{%url 'create_user'%}" method="POST" class="formdd">
+      {% csrf_token %}
+
+      <div>
+        <input
+          required
+          class="input"
+          type="text"
+          name="{{ form.username.name }}"
+          id="cated"
+          placeholder="UserName"
+          value="{{ form.username.value|default_if_none:'' }}"
+        />
+        {% if form.username.errors %}
+        <div class="error">{{ form.username.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div>
+        <input
+          type="password"
+          class="input"
+          name="{{ form.password1.name }}"
+          id="password"
+          placeholder="Password"
+          value="{{ form.password1.value|default_if_none:'' }}"
+        />
+        {% if form.password1.errors %}
+        <div class="error">{{ form.password1.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div>
+        <input
+          type="password"
+          class="input"
+          name="{{ form.password2.name }}"
+          id="password"
+          placeholder="Confirm Password"
+          value="{{ form.password2.value|default_if_none:'' }}"
+        />
+        {% if form.password2.errors %}
+        <div class="error">{{ form.password2.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div>
+        <label for="superuser">Superuser Status</label>
+        {{ form.is_superuser }} {% if form.is_superuser.errors %}
+        <div class="error">{{ form.is_superuser.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <input class="login-button" type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
+{% endblock content %}

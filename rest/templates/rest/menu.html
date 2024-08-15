@@ -1,0 +1,55 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<div class="bg-dark carsss">
+  <div class="cardsss">
+    <div class="container-fluid d-flex justify-content-center flex-wrap">
+      {%for category in category%}
+      <div class="card bg-light text-white">
+        <img
+          src="{% static 'assets/img/category_item/'%}{{category.name}}.jpg"
+          class="card-img"
+        />
+        <div class="card-img-overlay">
+          <a
+            href="{% url 'menu' %}?q={{ category.name }}"
+            class="text-decoration-none"
+          >
+            <h5 class="card-title text-light text-center">
+              {{category.name}}
+            </h5></a
+          >
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+  <div class="line-break">
+    <hr />
+  </div>
+
+  <div class="container carsss" id="menup">
+    <div class="container" id="menup">
+      <section class="menu-products">
+        {%for menu in menu%}
+        <div class="card mb-3 col bg-dark text-light">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{% static 'assets/img/menu_items/'%}{{menu.name}}.jpg "
+              class="img-fluid rounded-start" ">
+            </div>
+
+            <div class="col-md-8">
+              <div class="card-body">
+                <a href="{%url 'menu_description' menu.id%}"
+                  ><h5 class="card-title">{{menu.name}}</h5>
+                  <p class="card-text">$ {{menu.price }}</p></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        {%endfor %}
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,34 @@
+<nav class="admind textlook">
+  <div class="h6 text-warning">{{user.username}}</div>
+  <div>
+    <a href=" {%url 'admin'%}">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="#FFD700"
+        class="bi bi-egg-fill text-light"
+        viewBox="0 0 16 16"
+      >
+        <path d="M14 10a6 6 0 0 1-12 0C2 5.686 5 0 8 0s6 5.686 6 10" />
+      </svg>
+      LITTLELEMON
+    </a>
+  </div>
+  {% if request.user.is_authenticated%}
+  <div>
+    <a class="btn btn-danger" href="{%url 'logout_page'%}">Logout</a>
+    {%else%}
+    <div>
+      <button
+        type="button"
+        class="btn btn-danger"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdropa"
+      >
+        Login
+      </button>
+    </div>
+    {%endif%}
+  </div>
+</nav>

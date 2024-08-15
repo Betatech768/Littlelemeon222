@@ -1,0 +1,18 @@
+<nav>
+  <a href="#"><h1>Littlelemon</h1></a>
+  <ul>
+    <li>Home</li>
+    <li>Menu</li>
+    <li>About</li>
+  </ul>
+  {% if request.user.is_authenticated%}
+  <a href="{%url 'logout_page'%}">logout</a>
+
+  {%else%}
+  <a href="{%url 'login_page'%}">login</a>
+  {%endif%}
+  <form action="" method="GET">
+    <input type="text" name="q" placeholder="Search Menu..." />
+  </form>
+</nav>
+<hr />

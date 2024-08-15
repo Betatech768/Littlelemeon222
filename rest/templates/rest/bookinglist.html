@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<div class="booking_list">
+  <div class="bokin text-center">
+    <h1 class="text-light">Booking List</h1>
+    <hr />
+    {%for bookings in booking %}
+    <article class="bokin-content">
+      <p class="text-light">{{ bookings.comment }}</p>
+      <h6 class="text-light">
+        {{ bookings.first_name }} {{ bookings.last_name }}
+      </h6>
+      <h6 class="text-light">{{ bookings.guest_number }}</h6>
+      <a class="text-warning" href="{%url 'delete_book' bookings.id%}"
+        >DELETE BOOKING</a
+      >
+    </article>
+    {%endfor%}
+  </div>
+</div>
+{% endblock content %}

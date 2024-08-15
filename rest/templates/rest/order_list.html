@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="booking_list">
+  <div class="bokin text-center text-light">
+    <h1 class="text-light">Order List</h1>
+    <hr />
+    {% for takes in takes %}
+    <article class="bokin-content">
+      <a class="text-warning" href="">DELETE BOOKING</a>
+    </article>
+    {%endfor%}
+  </div>
+</div>
+{% endblock content %}

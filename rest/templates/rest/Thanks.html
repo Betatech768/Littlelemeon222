@@ -1,0 +1,24 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<div class="thanks">
+  <div class="bg-dark">
+    <div class="miggg container my-5 container_pics_img">
+      <div class="mig">
+        <img src="{% static 'assets/img/mario-and-adrian.jpg'%}" />
+      </div>
+      <div class="text-ccc bg-danger">
+        <div class="migtext text-center">
+          <h1 class="text-light">THANK YOU</h1>
+          <p class="text-left">Your Booking Has been Reserved.</p>
+          <p>See You Soon!</p>
+        </div>
+      </div>
+    </div>
+    <div class="price_container text-center">
+      <a class="btn btn-danger btn-lg" href="{%url 'home'%}">Go Back</a>
+    </div>
+
+    <hr />
+  </div>
+  {%endblock content %}
+</div>

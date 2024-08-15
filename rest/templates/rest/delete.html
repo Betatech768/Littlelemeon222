@@ -1,0 +1,67 @@
+{%extends 'base.html'%}{%block content%}
+
+<style>
+  .fluid {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .ssss {
+    border-radius: 20px;
+  }
+  .child_container {
+    height: 80vh;
+    width: 80vh;
+
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 20px 5px rgba(255, 204, 0, 0.7);
+    transition: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation: glowAnimation 3s infinite alternate;
+    background-color: #a70000;
+  }
+
+  @keyframes glowAnimation {
+    0% {
+      box-shadow: 0 0 20px 5px rgba(255, 204, 0, 0.7);
+    }
+    100% {
+      box-shadow: 0 0 20px 5px rgba(0, 251, 255, 0.692);
+    }
+  }
+  .butnnn {
+    padding: 10px 20px;
+    border: none;
+    transition: 0.5s;
+  }
+  .butnnn:hover {
+    background-color: transparent;
+    border: 1px solid white;
+  }
+</style>
+
+<div class="container-fluid fluid bg-dark text-center fs-1">
+  <div class="delete_parent ssss">
+    <div class="child_container">
+      <form action="" method="POST">
+        <p class="text-light">Are you sure you want to delete {{obj}}</p>
+        <a
+          class="text-decoration text-light fs-4"
+          href="{{ request.META.HTTP_REFERER }}
+            "
+          >Go Back</a
+        >
+        <button
+          class="btn btn-lg fs-4 butnnn text-light bg-danger fw-bold"
+          type="submit"
+        >
+          Confirm
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{%endblock content%}

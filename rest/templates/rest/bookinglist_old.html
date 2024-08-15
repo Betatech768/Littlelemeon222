@@ -1,0 +1,13 @@
+{%extends 'main.html'%} {%block content%}
+
+<div>
+  <div>
+    {%for booking in booking%}
+    <h3>Full Name: {{booking.first_name}} {{booking.last_name}}</h3>
+    <h4>Number of Guest: {{booking.guest_number}}</h4>
+    <h5>Comment: {{booking.comment}}</h5>
+    <hr />
+    {%endfor%}
+  </div>
+</div>
+{%endblock content %}

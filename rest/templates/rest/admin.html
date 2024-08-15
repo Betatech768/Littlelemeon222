@@ -1,0 +1,605 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<style>
+  .admin-bg {
+  }
+</style>
+
+<div class="admin-bg">
+  <main>
+    <div>
+      <div class="admin-content container">
+        <div class="admin-card col">
+          <h5>
+            <button
+              type="button"
+              class="btn text-light"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalq"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="30"
+                height="30"
+                viewBox="0 0 48 48"
+              >
+                <path
+                  fill="#4caf50"
+                  d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+                ></path>
+                <path fill="#fff" d="M21,14h6v20h-6V14z"></path>
+                <path fill="#fff" d="M14,21h20v6H14V21z"></path>
+              </svg>
+              Categories
+            </button>
+          </h5>
+          <hr />
+          {%for categories in categories%}
+          <div class="admin-cards">
+            <a
+              href="{% url 'admin' %}?q={{ categories.name }}"
+              class="text-decoration-none text-light"
+              ><div><span>{{categories.name}}</span></div></a
+            >
+            <a
+              class="btn btn-outline btn-sm text-light text-decoration-none"
+              href="{% url 'delete_cat' categories.id %}"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-octagon-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"
+                />
+              </svg>
+              Delete {{categories.name}}
+            </a>
+            <a
+              href="{% url 'update_cat' categories.id %}"
+              class="text-decoration-none text-light"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="gold"
+                class="bi bi-pen-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"
+                />
+              </svg>
+              Edit {{categories.name}}
+            </a>
+          </div>
+          {%endfor%}
+          <div class="admin-cards">
+            <a href="{% url 'admin' %}" class="text-decoration-none text-light"
+              ><h5 class="text-light">All</h5></a
+            >
+          </div>
+        </div>
+
+        <div class="admin-card col">
+          <a
+            href="{%url 'create_menu'%}"
+            class="text-decoration-none text-light"
+            ><h5 class="text-light">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="30"
+                height="30"
+                viewBox="0 0 48 48"
+              >
+                <path
+                  fill="#4caf50"
+                  d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+                ></path>
+                <path fill="#fff" d="M21,14h6v20h-6V14z"></path>
+                <path fill="#fff" d="M14,21h20v6H14V21z"></path>
+              </svg>
+              Menu
+            </h5></a
+          >
+          <hr />
+          {%for menus in menus%}
+          <div class="admin-cards">
+            <div><span>{{menus.name}}</span></div>
+            <a
+              href="{% url 'delete_menu' menus.id %}"
+              class="text-decoration-none text-light"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-octagon-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"
+                />
+              </svg>
+              Delete {{menus.name}} </a
+            ><a
+              href="{% url 'update_menu' menus.id %}"
+              class="text-decoration-none text-light"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="gold"
+                class="bi bi-pen-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"
+                />
+              </svg>
+              Edit {{menus.name}}
+            </a>
+          </div>
+          {%endfor%}
+        </div>
+
+        <div class="admin-card col">
+          <h5 class="text-light">Bookings</h5>
+          <a class="text-warning" href="{% url 'book_list' %}"
+            >View all Bookings</a
+          >
+          <hr />
+          {%for bookings in bookings%}
+          <div class="admin-cards">
+            <div>
+              <div>
+                <h5 class="text-light">{{ bookings.created | timesince }}</h5>
+                <h6 class="text-light">
+                  {{ bookings.first_name }} {{ bookings.last_name }}
+                </h6>
+                <h6 class="text-light">{{ bookings.guest_number }}</h6>
+                <h6 class="text-light">{{ bookings.comment }}</h6>
+              </div>
+            </div>
+            <a
+              href="{%url 'delete_book' bookings.id%}"
+              class="text-decoration-none text-light"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-octagon-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"
+                />
+              </svg>
+              Delete {{bookings.first_name}}{{booking.last_name}}
+            </a>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+
+    <div class="searchbar">
+      <div class="search-button">
+        <div class="inputGroup">
+          <form action="" method="GET">
+            <input
+              class="text-light"
+              type="search"
+              required=""
+              autocomplete="off"
+              name="q"
+            />
+            <label for="name">Search Menu ...</label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="admin-content container">
+        {% if request.user.is_superuser %}
+        <div class="admin-card col">
+          <a
+            href="{%url 'create_user'%}"
+            class="text-decoration-none text-light"
+            ><h5 class="text-light" class="text-light">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="30"
+                height="30"
+                viewBox="0 0 48 48"
+              >
+                <path
+                  fill="#4caf50"
+                  d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+                ></path>
+                <path fill="#fff" d="M21,14h6v20h-6V14z"></path>
+                <path fill="#fff" d="M14,21h20v6H14V21z"></path>
+              </svg>
+              Create User
+            </h5></a
+          >
+          <hr />
+          <div class="admin-cards">
+            <div>
+              <span>Click The Above Button to Add New Staff Members</span>
+            </div>
+            <a class="text-warning" href=""></a>
+          </div>
+        </div>
+        <div class="admin-card col">
+          <h5 class="text-light">Users</h5>
+          <hr />
+          {%for users in users %}
+          <div class="admin-cards">
+            <div><span>{{users.username}}</span></div>
+            <a
+              href="{% url 'delete_user' users.id %}"
+              class="text-decoration-none text-light"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-octagon-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"
+                />
+              </svg>
+              Delete User
+            </a>
+          </div>
+          {%endfor%}
+        </div>
+        {%endif%}
+        <div class="admin-card col">
+          <h5 class="text-light">Orders</h5>
+
+          <hr />
+
+          <div class="admin-cards">
+            <div>
+              {% for takes in takes %}
+              <h6 class="text-decoration-none text-light">
+                FULL NAME: {{ takes.full_name }}
+              </h6>
+              <p class="text-light"><small>ORDER: {{ takes.order }}</small></p>
+              <p class="text-light">
+                <small>QUANTITY: {{ takes.quantity}}</small>
+              </p>
+              <p class="text-light"><small>ADDRESS: {{ takes.city }}</small></p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%if request.user.is_superuser%}
+    <div>
+      <div class="admin-content container">
+        <div class="admin-card col">
+          <h5 class="text-light">Contact</h5>
+
+          <hr />
+
+          <div class="admin-cards">
+            <div>
+              {% for contact in contact %}
+              <h6 class="text-decoration-none text-light">
+                {{ contact.Email }}
+              </h6>
+              <p class="text-light"><small> {{ contact.Message }}</small></p>
+
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endif%}
+  </main>
+  <!-- Modal for Category Creation  -->
+  <div
+    class="modal fade"
+    id="exampleModalq"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <div class="conted">
+            <div class="containerddd">
+              <div class="headingddd">Create Category</div>
+              <!-- your_template.html -->
+              <form
+                action="{% url 'create_cat' %}"
+                method="POST"
+                class="formdd"
+                enctype="multipart/form-data"
+              >
+                {% csrf_token %}
+                <div>
+                  <label for="cated">Category Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="cated"
+                    class="input"
+                    placeholder="Category Name"
+                    value="{{ form.name.value|default_if_none:'' }}"
+                    required
+                  />
+                  {% if form.name.errors %}
+                  <div class="error">{{ form.name.errors.0 }}</div>
+                  {% endif %}
+                </div>
+
+                <div>
+                  <label for="description">Description</label>
+                  <textarea
+                    name="description"
+                    id="description"
+                    class="input"
+                    placeholder="Description"
+                    rows="4"
+                    cols="50"
+                    required
+                  >
+{{ form.description.value|default_if_none:'' }}</textarea
+                  >
+                  {% if form.description.errors %}
+                  <div class="error">{{ form.description.errors.0 }}</div>
+                  {% endif %}
+                </div>
+
+                <button type="submit" class="login-button">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal end for Cat creation  -->
+
+  <!-- modal for cat edit  -->
+
+  <div
+    class="modal fade"
+    id="exampleModalcat"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <div class="conted">
+            <div class="containerddd">
+              <div class="headingddd">Edit Category</div>
+              <form action="" method="POST" class="formdd">
+                {%csrf_token%}{%for field in form%} {{filed}}{%endfor%}
+                <input
+                  required
+                  class="input"
+                  type="text"
+                  name="cated"
+                  id="cated"
+                  placeholder="Category Name"
+                />
+                <textarea
+                  rows="4"
+                  cols="50"
+                  class="input"
+                  placeholder="Description"
+                  required
+                ></textarea>
+                <input class="login-button" type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal for cat edit  -->
+
+  <!-- Modal for User Creation-->
+  <div
+    class="modal fade"
+    id="good"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="goodLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <div class="conted">
+            <div class="containerddd">
+              <div class="headingddd text-light">Create User</div>
+              <form action="" method="POST" class="formdd">
+                <input
+                  required
+                  class="input"
+                  type="text"
+                  name="username"
+                  id="cated"
+                  placeholder="UserName"
+                />
+                <input
+                  type="password"
+                  class="input"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                />
+                <input
+                  type="password"
+                  class="input"
+                  name="password"
+                  id="password"
+                  placeholder="Confirm Password"
+                />
+                <label for="superuser">Superuser Status</label>
+                <input type="checkbox" class="input" name=" superuser" />
+                <input class="login-button" type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1
+            class="modal-title fs-5 text-danger text-bold"
+            id="exampleModalLabel"
+          >
+            WATCH IT!
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST">
+            {% csrf_token %}
+
+            <p>Are you sure you want to delete {{obj}}</p>
+            <a
+              class="btn btn-sm btn-primary text-light"
+              href="{{ request.META.HTTP_REFERER }}
+        "
+              >Go Back</a
+            >
+            <button class="btn btn-sm btn-danger" type="submit">Confirm</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal for Menu Creation -->
+
+  <!-- modal creation form for menu end -->
+
+  <!-- modal for editing menu start -->
+  <div
+    class="modal fade"
+    id="exampleModalbat"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <div class="conted">
+            <div class="containerddd">
+              <div class="headingddd">Edit Menu</div>
+              <form action="" method="POST" class="formdd">
+                <label for="fruit">Choose a fruit:</label>
+                <input
+                  list="fruits"
+                  id="fruit"
+                  name="fruit"
+                  class="input"
+                  placeholder="Type or select a fruit"
+                  required
+                />
+                <datalist id="fruits">
+                  <option value="Apple"></option>
+                  <option value="Banana"></option>
+                  <option value="Cherry"></option>
+                </datalist>
+
+                <input
+                  required
+                  class="input"
+                  type="text"
+                  name="name"
+                  id="cated"
+                  placeholder="Menu Name"
+                />
+
+                <input
+                  class="input"
+                  type="number"
+                  name="price"
+                  id="price"
+                  placeholder="Enter Price"
+                />
+                <textarea
+                  rows="4"
+                  cols="50"
+                  class="input"
+                  placeholder="Menu Description"
+                  required
+                ></textarea>
+                <input class="login-button" type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

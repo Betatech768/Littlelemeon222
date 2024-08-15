@@ -1,0 +1,58 @@
+{%extends 'main.html'%}{%block content%}
+
+<style>
+  .contact-form {
+    margin-top: 150px;
+    margin-bottom: 150px;
+  }
+</style>
+<section class="contact-form">
+  <div class="contact">
+    <div class="containerdd col">
+      <div class="heading">Contact Us</div>
+      <form action="{% url 'contact' %}" method="POST" class="formdddd">
+        {% csrf_token %}
+
+        <!-- Render the email field with hardcoded attributes -->
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="input"
+            placeholder="E-mail"
+            value="{{ form.email.value|default_if_none:'' }}"
+            required
+          />
+          {% if form.email.errors %}
+          <div class="error">{{ form.email.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <!-- Render the message field with hardcoded attributes -->
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            name="message"
+            id="message"
+            class="input"
+            placeholder="Message"
+            rows="4"
+            cols="50"
+            required
+          >
+{{ form.message.value|default_if_none:'' }}</textarea
+          >
+          {% if form.message.errors %}
+          <div class="error">{{ form.message.errors.0 }}</div>
+          {% endif %}
+        </div>
+
+        <!-- Render the submit button -->
+        <button type="submit" class="login-button">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+{%endblock content%}
